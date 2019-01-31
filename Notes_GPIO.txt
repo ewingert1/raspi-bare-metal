@@ -1,0 +1,26 @@
+41 registres :
+
+GPFSELn, avec n dans {0..5} :
+Each pin can have an attributed function, such a input, output or special functions.
+The following 3-bits combinations set the behaviour of the selected pin.
+(Extracted from BCM2835 datasheet)
+000 = GPIO Pin is an input 
+001 = GPIO Pin is an output 
+100 = GPIO Pin takes alternate function 0 
+101 = GPIO Pin takes alternate function 1 
+110 = GPIO Pin takes alternate function 2 
+111 = GPIO Pin takes alternate function 3 
+011 = GPIO Pin takes alternate function 4 
+010 = GPIO Pin takes alternate function 
+
+Then we can see that a normal 32bits register can select a function for 10 GPIO pins
+bits : 	2 - 0 for the GPIO_0 pin
+and so on: 
+		29 - 27 for the GPIO_9 pin
+
+
+So, in order to set pin GPIO_n, we'll have to find the right register 
+using an integer division by 10,
+then take the rest of the division as an offset to navigate in the double word.
+
+

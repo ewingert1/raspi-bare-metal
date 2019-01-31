@@ -1,0 +1,20 @@
+Notes about ARM assembly good practices :
+
+DEFINE A FUNCTION/PROCEDURE :
+-The lr register (link register) stores the address of the instruction next to the one that called the function (the instruction after the 'bl').
+	-> This means that at the end of a procedure/function, we must move the value of lr into the program counter (pc)
+-User are also responsible for the saving of the r4-r11 registers, we must then push every register we could use in r4-r11 in the stack at the beginning of a procedure/function
+-Registers r0,r1,r2,r3 are used to pass arguments
+-Registers r0,r1 are used to return values
+
+MNEMONICS AND STUFF ABOUT MEMORY AND INSTRUCTION SET:
+push {r4-r7,lr} 
+is equivalent to stmdb sp!, {r4-r7,lr}  
+which is equivalent to: 
+str r4,[sp,#-4]!
+str r5,[sp,#-4]!
+str r6, [sp],#-4
+....
+stm means store multiple
+db means decrement before
+the ! indicates the processor to store the decremented address calculated by stmdb sp!, {r4-r7,lr} in sp after the storing
