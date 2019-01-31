@@ -19,6 +19,10 @@ vectors:
 .global _start
 _start:
     mov sp,#0x8000
+    
+    /* TODO : add IRQ stack pointer as well */
+    /* TODO : add code to switch from supervisor to irq mode */
+    
     bl notmain
 
 
